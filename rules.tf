@@ -148,6 +148,8 @@ variable "rules" {
     storm-nimbus-tcp     = [6627, 6627, "tcp", "Nimbus"]
     storm-ui-tcp         = [8080, 8080, "tcp", "Storm UI"]
     storm-supervisor-tcp = [6700, 6703, "tcp", "Supervisor"]
+    # Vault
+    vault-tcp = [8200, 8200, "tcp", "Vault server"]
     # Web
     web-jmx-tcp = [1099, 1099, "tcp", "JMX"]
     # WinRM
@@ -398,6 +400,11 @@ variable "auto_groups" {
     }
     web = {
       ingress_rules     = ["http-80-tcp", "http-8080-tcp", "https-443-tcp", "web-jmx-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    vault = {
+      ingress_rules     = ["vault-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
